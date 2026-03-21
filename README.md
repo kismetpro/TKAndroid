@@ -48,6 +48,14 @@ TKAndroid/
 | 混合内容 | `MIXED_CONTENT_ALWAYS_ALLOW` |
 | 兼容性 | minSdk 21 (Android 5.0+) |
 
+1. **更新应用图标**: 使用了您提供的 [logo.png](file:///c:/Users/K/Documents/webAPP/TKAndroid/logo.png) 作为应用图标。我已将其转换为 `ic_launcher.png` 和 `ic_launcher_round.png` 并放置在相应的 `mipmap` 资源目录下。
+2. **实现深色模式跟随**: 引入了 `androidx.webkit` 库，并配置了 `DayNight` 主题。
+3. **修改应用名称**: 在 `strings.xml` 中将名称更新为“题酷”。
+4. **移除启动页**: 应用启动将直接进入主界面。
+5. **移除下拉刷新**: 移除了 `SwipeRefreshLayout`。
+6. **禁用长按选中**: 禁用了 WebView 的文字选中功能。
+7. **修复构建与编译错误**: 解决了 Gradle 兼容性、资源编译 (AAPT) 和 BuildConfig 缺失等一系列问题。
+
 ## 构建步骤
 
 ### 方式一：通过 Android Studio（推荐）
