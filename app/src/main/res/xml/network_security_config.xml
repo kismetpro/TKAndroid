@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    网络安全配置：
+    - 允许访问 HTTPS（默认已支持）
+    - 允许访问 HTTP 明文流量（兼容部分旧资源）
+    - 可在此添加证书固定（Pinning）来增强安全性
+-->
+<network-security-config>
+    <!-- 允许 HTTP 明文流量（谨慎使用，仅为兼容性保留） -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

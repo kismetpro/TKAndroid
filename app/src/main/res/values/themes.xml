@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 主题：继承 Material 无 ActionBar 风格 -->
+    <style name="Theme.TKAndroid" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <!-- 启动页主题：纯色背景，无 ActionBar -->
+    <style name="Theme.TKAndroid.Splash" parent="Theme.TKAndroid">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- Android 12+ 防止启动页图标被系统覆盖 -->
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+</resources>
