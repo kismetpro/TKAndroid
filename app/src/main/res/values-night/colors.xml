@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色主题色 -->
+    <color name="colorPrimary">#1976D2</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#64B5F6</color>
+    <!-- 深色背景 -->
+    <color name="colorBackground">#121212</color>
+    <!-- 深色模式文字 -->
+    <color name="colorText">#E0E0E0</color>
+</resources>

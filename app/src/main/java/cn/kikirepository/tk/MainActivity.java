@@ -28,7 +28,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.webkit.WebSettingsCompat;
+import androidx.webkit.WebViewFeature;
 
 import cn.kikirepository.tk.BuildConfig;
 
@@ -37,9 +38,9 @@ import cn.kikirepository.tk.BuildConfig;
  * 功能：
  *   - Cookie 持久化（CookieManager）
  *   - 文件上传支持（Android 5.0+）
- *   - 下拉刷新
  *   - 返回键回退 WebView 历史
  *   - 错误页处理
+ *   - 禁用长按选中
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
     private WebView webView;
     private ProgressBar progressBar;
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     /** 文件上传回调（Android 5.0+） */
     private ValueCallback<Uri[]> uploadMessageArray;
@@ -66,16 +66,12 @@ public class MainActivity extends AppCompatActivity {
         // 初始化视图
         webView = findViewById(R.id.webView);
         progressBar = findViewById(R.id.progressBar);
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
         // 配置 WebView
         setupWebView();
 
         // 配置 Cookie
         setupCookieManager();
-
-        // 配置下拉刷新
-        setupSwipeRefresh();
 
         // 加载目标 URL
         webView.loadUrl(TARGET_URL);
@@ -124,6 +120,11 @@ public class MainActivity extends AppCompatActivity {
         String originalUA = settings.getUserAgentString();
         settings.setUserAgentString(originalUA + " TKAndroidApp/1.0");
 
+        // ── 深色模式支持 ──
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+            WebSettingsCompat.setForceDark(settings, WebSettingsCompat.FORCE_DARK_AUTO);
+        }
+
         // ── WebViewClient：在 APP 内打开所有链接 ──
         webView.setWebViewClient(new WebViewClient() {
 
@@ -140,18 +141,15 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 // 页面加载完毕后持久化 Cookie
                 CookieManager.getInstance().flush();
-                // 关闭下拉刷新动画
-                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request,
-                                        WebResourceError error) {
+                                         WebResourceError error) {
                 super.onReceivedError(view, request, error);
                 // 仅对主框架报错时显示提示
                 if (request.isForMainFrame()) {
                     progressBar.setVisibility(View.GONE);
-                    swipeRefreshLayout.setRefreshing(false);
                     Toast.makeText(MainActivity.this,
                             "页面加载失败，请检查网络连接", Toast.LENGTH_SHORT).show();
                 }
@@ -199,8 +197,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                // 可选：将网页标题更新到 ActionBar
-                // getSupportActionBar().setTitle(title);
             }
 
             // ── 文件上传（Android 5.0+） ──
@@ -233,6 +229,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // 禁用长按选中
+        webView.setOnLongClickListener(v -> true);
+        webView.setLongClickable(false);
+
         // 开启 WebView 调试（仅 Debug 构建）
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG);
@@ -249,17 +249,6 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             cookieManager.setAcceptThirdPartyCookies(webView, true);
         }
-    }
-
-    /**
-     * 配置下拉刷新
-     */
-    private void setupSwipeRefresh() {
-        swipeRefreshLayout.setColorSchemeResources(
-                android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light);
-        swipeRefreshLayout.setOnRefreshListener(() -> webView.reload());
     }
 
     // ──────────────── 文件上传相关 ────────────────

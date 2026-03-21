@@ -47,4 +47,6 @@ dependencies {
     implementation 'androidx.core:core:1.12.0'
     // SwipeRefreshLayout（下拉刷新）
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    // WebView 扩展功能 (用于深色模式支持)
+    implementation 'androidx.webkit:webkit:1.9.0'
 }

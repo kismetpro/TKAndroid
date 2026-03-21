@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- APP 名称 -->
-    <string name="app_name">TK 题库</string>
+    <string name="app_name">题酷</string>
     <!-- 启动页副标题 -->
     <string name="splash_subtitle">医学影像学习平台</string>
     <!-- 版本号显示 -->
