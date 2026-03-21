@@ -158,19 +158,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
-                // 站外链接在浏览器打开，站内链接在 APP 内打开
+                // http/https 链接均在 APP 内打开
                 if (url.startsWith("http://") || url.startsWith("https://")) {
-                    if (url.contains("kikirepository.cn")) {
-                        // 站内链接：在 WebView 内加载
-                        return false;
-                    } else {
-                        // 站外链接：调用系统浏览器
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                        startActivity(intent);
-                        return true;
-                    }
+                    return false;
                 }
-                // tel: / mailto: 等协议交给系统处理
+                // 其他协议（如 tel:, mailto:）由系统处理
                 try {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent);
