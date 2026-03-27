@@ -67,13 +67,16 @@ public class MainActivity extends AppCompatActivity {
         webView = findViewById(R.id.webView);
         progressBar = findViewById(R.id.progressBar);
 
+        // 配置 Cookie（先配置Cookie，再清除缓存，保留登录状态）
+        setupCookieManager();
+
         // 配置 WebView
         setupWebView();
 
-        // 配置 Cookie
-        setupCookieManager();
+        // 每次启动清除缓存，但保留Cookie（登录状态）
+        webView.clearCache(true);
 
-        // 加载目标 URL
+        // 加载目标 URL（强制从网络加载）
         webView.loadUrl(TARGET_URL);
     }
 
@@ -93,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         settings.setDatabaseEnabled(true);         // Web SQL Database
 
         // ── 缓存 ──
-        settings.setCacheMode(WebSettings.LOAD_DEFAULT); // 正常时走缓存，离线时用缓存
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 每次都从网络加载，不使用缓存
 
         // ── 混合内容（HTTPS 页面加载 HTTP 资源） ──
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
