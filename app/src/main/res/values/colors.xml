@@ -6,6 +6,8 @@
     <color name="colorAccent">#29B6F6</color>
     <!-- 背景色 -->
     <color name="colorBackground">#FAFAFA</color>
+    <!-- 浅色模式状态栏和导航栏白色 -->
+    <color name="colorWhite">#FFFFFF</color>
     <!-- 文字颜色 -->
     <color name="colorText">#212121</color>
 </resources>
