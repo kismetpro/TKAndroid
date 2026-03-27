@@ -8,4 +8,6 @@
     <color name="colorBackground">#121212</color>
     <!-- 深色模式文字 -->
     <color name="colorText">#E0E0E0</color>
+    <!-- 深色模式状态栏和导航栏 -->
+    <color name="colorWhite">#000000</color>
 </resources>

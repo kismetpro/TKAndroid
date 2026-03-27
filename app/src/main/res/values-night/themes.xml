@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 深色主题：继承 Material DayNight 无 ActionBar 风格 -->
+    <style name="Theme.TKAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:statusBarColor">@color/colorWhite</item>
+        <item name="android:navigationBarColor">@color/colorWhite</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- 启动页主题：纯色背景，无 ActionBar -->
+    <style name="Theme.TKAndroid.Splash" parent="Theme.TKAndroid">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+</resources>
